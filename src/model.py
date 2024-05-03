@@ -25,15 +25,15 @@ class ElectronicsCoolingModel(nn.Module):
         x = self.output(x)
         return x
 
-def train_model(model, criterion, optimizer, train_loader, epochs=50):
+def train_model(model, criterion, optimizer, train_loader, epochs=55):
     loss_history = []
     for epoch in range(epochs):
         for inputs, targets in train_loader:
             optimizer.zero_grad()
-            outputs = model(inputs)
+            outputs = model(inputs) # forward pass
             loss = criterion(outputs, targets)
-            loss.backward() # computes the gradients of the loss function
-            optimizer.step() # updates the model's weights and biases and minimizes the loss.
+            loss.backward() # backward pass (gradient calculation)
+            optimizer.step() # update model's weights and biases, minimizes the loss.
         loss_history.append(loss.item())
         print(f'Epoch {epoch+1}, Loss: {loss.item()}')
     return loss_history
@@ -50,12 +50,12 @@ def main():
 
     # Create a dataset and loader
     dataset = TensorDataset(inputs, targets)
-    train_loader = DataLoader(dataset, batch_size=15, shuffle=True)
+    train_loader = DataLoader(dataset, batch_size=20, shuffle=True)
 
     # Model, criterion, and optimizer
     model = ElectronicsCoolingModel()
     criterion = nn.MSELoss()
-    optimizer = optim.Adam(model.parameters(), lr=0.001) # Adam optimization is a stochastic gradient descent method
+    optimizer = optim.Adam(model.parameters(), lr=0.0005) # Adam optimization is a stochastic gradient descent method
 
     # Train the model
     loss_history = train_model(model, criterion, optimizer, train_loader)

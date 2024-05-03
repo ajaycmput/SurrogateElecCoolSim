@@ -10,8 +10,7 @@ def generate_data(num_samples=1000):
     # Randomly generate ambient temperatures (in degrees Celsius)
     ambient_temps = np.random.uniform(low=10, high=35, size=num_samples)
     
-    # Placeholder for thermal response (temperature of the circuit), this would be a function of power_loads and ambient_temps
-    # For simplicity, we assume a linear relationship here; real scenarios might need a complex model or actual simulation data.
+    # Assume a linear relationship
     circuit_temps = 0.5 * power_loads + 0.4 * ambient_temps + np.random.normal(loc=0, scale=5, size=num_samples)
     
     # Create a DataFrame
