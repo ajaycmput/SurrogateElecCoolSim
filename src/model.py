@@ -33,34 +33,29 @@ def train_model(model, criterion, optimizer, train_loader, epochs=55):
             outputs = model(inputs) # forward pass
             loss = criterion(outputs, targets)
             loss.backward() # backward pass (gradient calculation)
-            optimizer.step() # update model's weights and biases, minimizes the loss.
+            optimizer.step() # minimizes the loss.
         loss_history.append(loss.item())
         print(f'Epoch {epoch+1}, Loss: {loss.item()}')
     return loss_history
 
 def main():
-    # Load your dataset
+
     dataset = pd.read_csv('../data/electronics_cooling_simulation_data.csv')
     inputs = dataset[['Power Load (W)', 'Ambient Temp (C)']].values
     targets = dataset[['Circuit Temp (C)']].values
 
-    # Convert to PyTorch tensors
     inputs = torch.Tensor(inputs)
     targets = torch.Tensor(targets)
 
-    # Create dataset and loader
     dataset = TensorDataset(inputs, targets)
     train_loader = DataLoader(dataset, batch_size=20, shuffle=True)
 
-    # Model, criterion, and optimizer
     model = ElectronicsCoolingModel()
     criterion = nn.MSELoss()
     optimizer = optim.Adam(model.parameters(), lr=0.0005) # Adam optimization is a stochastic gradient descent method
 
-    # Train the model
     loss_history = train_model(model, criterion, optimizer, train_loader)
 
-    # Plotting the loss over epochs
     plt.figure(figsize=(10, 5))
     plt.plot(range(1, len(loss_history) + 1), loss_history, label='Training Loss', marker='o')
     plt.xlabel('Epoch')
