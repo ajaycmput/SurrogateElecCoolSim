@@ -48,7 +48,7 @@ def main():
     inputs = torch.Tensor(inputs)
     targets = torch.Tensor(targets)
 
-    # Create a dataset and loader
+    # Create dataset and loader
     dataset = TensorDataset(inputs, targets)
     train_loader = DataLoader(dataset, batch_size=20, shuffle=True)
 
