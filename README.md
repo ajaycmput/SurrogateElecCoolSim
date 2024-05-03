@@ -4,17 +4,6 @@
 
 This project develops a surrogate model to quickly predict thermal behavior in electronic circuits, streamlining the design process by reducing the time and cost associated with traditional simulations.
 
-## Goals
-
-- Create a fast and accurate surrogate model to emulate detailed thermal simulations of electronic circuits.
-- Automate the data collection and simulation processes for model training and validation.
-
-## System Design
-
-### Data Preparation
-
-- **Simulation Data**: Identify scenarios involving variations in power loads and ambient temperatures.
-- **Data Collection**: Develop a methodology to gather or generate comprehensive simulation data.
 
 ### Machine Learning Model
 
@@ -29,7 +18,3 @@ This project develops a surrogate model to quickly predict thermal behavior in e
 ## Challenges and Solutions
 
 - **Fluctuating Loss**: Observed during training; addressed by increasing the batch size for more stability.
-
-## Conclusion
-
-The project successfully demonstrates how machine learning can efficiently replicate and potentially replace extensive physical simulations in electronic design, offering a faster, cost-effective alternative.
